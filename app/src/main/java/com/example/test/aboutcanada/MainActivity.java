@@ -1,5 +1,7 @@
 package com.example.test.aboutcanada;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import java.nio.charset.Charset;
 public class MainActivity extends AppCompatActivity {
     JSONParser jsonparser = new JSONParser();
     String title;
+    Context context;
     JSONObject jobj = null;
     TextView tv ;
     private RecyclerView mRecyclerView;
@@ -37,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_list);
-        tv = (TextView) findViewById(R.id.text);
+        //tv = (TextView) findViewById(R.id.text);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -107,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (jsonData != null) {
                  Log.d("Neha data is",jsonData.getTitle());
+                //Activity activity = this.getActivity();
+               // this.getSupportActionBar().setTitle();
+                getSupportActionBar().setTitle(jsonData.getTitle());
+
                  mAdapter.setRowData(jsonData);
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.test.aboutcanada;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -57,6 +58,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
       }
 
       public void onBindViewHolder(ViewHolder holder,final int position){
+
+
           String title = values.rows[position].getTitle();
           String dsc = values.rows[position].getDesc();
           String url = values.rows[position].getImageViewURL();

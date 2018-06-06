@@ -3,7 +3,6 @@ package com.example.test.aboutcanada;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,16 +36,12 @@ public class MainActivity extends AppCompatActivity {
     TextView tv ;
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
-    private SwipeRefreshLayout swipeContainer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_list);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-
         //tv = (TextView) findViewById(R.id.text);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -55,21 +50,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter();
 
         mRecyclerView.setAdapter(mAdapter);
-
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeContainer.setRefreshing(false);
-                new retrievedata().execute();
-            }
-
-        });
-
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
 
         new retrievedata().execute();

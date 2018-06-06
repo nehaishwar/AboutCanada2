@@ -39,12 +39,6 @@ public class JsonData {
         public String getImageViewURL() {
             return imageViewURL;
         }
-
-        public void clear(){
-            title = "";
-            desc = "";
-            imageViewURL = "";
-        }
     }
 
     public String getTitle() {
@@ -63,5 +57,4 @@ public class JsonData {
         this.rows = rows;
     }
 
-    public void clear(){ rows = null;}
 }

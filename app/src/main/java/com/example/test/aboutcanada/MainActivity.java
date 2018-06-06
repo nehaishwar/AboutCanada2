@@ -1,6 +1,5 @@
 package com.example.test.aboutcanada;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.example.test.aboutcanada.model.JsonData;
+import com.example.test.aboutcanada.model.OpenJsonData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        context = getApplicationContext();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_list);
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 swipeContainer.setRefreshing(false);
-                new retrievedata().execute();
+                new RetrieveData().execute();
             }
 
         });
@@ -71,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-
-        new retrievedata().execute();
+       //Asyntack background task to read JSON Data
+        new RetrieveData().execute();
     }
-    class retrievedata extends AsyncTask<String,String,JsonData>{
+    class RetrieveData extends AsyncTask<String,String,JsonData>{
         JsonData jsonData;
 
         private String readAll(Reader rd) throws IOException {
@@ -89,9 +89,8 @@ public class MainActivity extends AppCompatActivity {
         public String readJsonFromUrl(String url) throws IOException, JSONException {
             InputStream is = new URL(url).openStream();
             try {
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+                BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("ISO-8859-1")));
                 String jsonText = readAll(rd);
-                //JSONObject json = new JSONObject(jsonText);
                 return jsonText;
             } finally {
                 is.close();
@@ -104,15 +103,14 @@ public class MainActivity extends AppCompatActivity {
             String[] simpleJsonWeatherData = {};
             try {
 
-                jstr = readJsonFromUrl("https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts");
+                jstr = readJsonFromUrl(context.getString(R.string.url));
                 jobj = new JSONObject(jstr);
+
                 title = jobj.getString("title");
-               // jsonData = new JsonData();
-                //simpleJsonWeatherData  = OpenJsonData.getRowsStringsFromJson(MainActivity.this,jstr);
-                //simpleJsonWeatherData[0] = title;
+
                 jsonData  = OpenJsonData.getRowsStringsFromJson(MainActivity.this,jstr);
-                //jsonData.title = title;
                 jsonData.setTitle(title);
+
                 Log.d("Neha Title is",jsonData.title);
             }catch(JSONException e) {
                 e.printStackTrace();
@@ -131,13 +129,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (jsonData != null) {
                  Log.d("Neha data is",jsonData.getTitle());
-                //Activity activity = this.getActivity();
-               // this.getSupportActionBar().setTitle();
-                getSupportActionBar().setTitle(jsonData.getTitle());
 
+                getSupportActionBar().setTitle(jsonData.getTitle());
                  mAdapter.setRowData(jsonData);
-                }
-            }
+              }
+        }
 
     }
 }

@@ -61,12 +61,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
           String title = values.rows[position].getTitle();
-          String dsc = null;
-          try {
+          String dsc =  values.rows[position].getDesc();
+          /*try {
               dsc = new String(values.rows[position].getDesc().getBytes("UTF-8"), "ISO-8859-1");
           } catch (java.io.UnsupportedEncodingException e) {
               dsc= " ";
-          }
+          }*/
 
           // values.rows[position].getDesc();
           String url = values.rows[position].getImageViewURL();
@@ -94,6 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         if (null == values) return 0;
         return values.rows.length;
   }
+
 
     public void setRowData(JsonData rowData) {
           values = rowData;

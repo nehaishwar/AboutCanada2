@@ -46,6 +46,13 @@ public final class OpenJsonData {
 
                 titlet = dayForecast.getString(OWM_TITLE);
                 descriptiont = dayForecast.getString(OWM_DESC);
+                 Log.d("Neha desct ",descriptiont);
+                try {
+                    descriptiont = new String(dayForecast.getString(OWM_DESC).getBytes("UTF-8"), "ISO-8859-1");
+                } catch (java.io.UnsupportedEncodingException e) {
+                    descriptiont= " ";
+                }
+                Log.d("Neha desct ",descriptiont);
                 imageHreft = dayForecast.getString(OWM_IMAGE);
                 JsonData.JsonRow  row = new JsonData.JsonRow();
                 row.setTitle(titlet);

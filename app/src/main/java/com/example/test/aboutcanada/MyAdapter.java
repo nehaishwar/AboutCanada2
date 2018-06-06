@@ -61,12 +61,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
           String title = values.rows[position].getTitle();
-          String dsc = values.rows[position].getDesc();
+          String dsc = null;
+          try {
+              dsc = new String(values.rows[position].getDesc().getBytes("UTF-8"), "ISO-8859-1");
+          } catch (java.io.UnsupportedEncodingException e) {
+              dsc= " ";
+          }
+
+          // values.rows[position].getDesc();
           String url = values.rows[position].getImageViewURL();
 
+          if((title == null || title.equals("null")) && (dsc == null || dsc.equals("null"))
+                  && url.equals("null")) return;
+          if(title == null || title.equals("null")) title = " ";
+          if(dsc == null || dsc.equals("null")) dsc = " ";
           holder.title.setText(title);
           holder.desc.setText(dsc);
-          Picasso.get().load(url).into(holder.imageView);
+          if(url != null)
+          Picasso.get().load(url).fit().into(holder.imageView);
+
+
 
           //String url = "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/American_Beaver.jpg/220px-American_Beaver.jpg";
           Log.d("Neha viewHolderTitle  ",title);

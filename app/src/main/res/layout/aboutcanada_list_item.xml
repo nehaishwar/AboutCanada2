@@ -4,22 +4,33 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <ImageView
+        android:id="@+id/Aboutcanada_list_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:padding="4dp"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
      <TextView
         android:id="@+id/Aboutcanada_list_title"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="4dp"/>
+         android:layout_gravity="center_vertical"
+         android:padding="2dp"/>
 
     <TextView
         android:id="@+id/Aboutcanada_list_desc"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <!--This View serves as a visual divider between list items-->
-
-    <ImageView
-        android:id="@+id/Aboutcanada_list_image"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"/>
+    <!--This View serves as a visual divider between list items-->
+    </LinearLayout>
+
 
 </LinearLayout>

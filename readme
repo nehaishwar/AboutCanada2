@@ -1,0 +1,19 @@
+This application is involves building a “proof of concept” app which consumes a REST service and displays photos with
+headings and descriptions.
+
+An Android app which:
+1. Ingests a json feed from
+https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json
+2. The feed contains a title and a list of rows
+3. The title in the toolbar updated from the json
+4. Displays the content (including image, title and description) as a
+   list of rows
+5. Each row should be the right height to display its own content
+   and no taller.
+6. Loads the images lazily
+7. Don’t download them all at once, but only as needed
+8. Refresh function swipe-to-refresh
+9. Should not block UI when loading the data from the json feed.
+
+
+This app is using Recycler view to display Table contents and Images are uploaded using Picasso.
